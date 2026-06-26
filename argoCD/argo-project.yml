@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: daksh-project
+  namespace: argocd
+spec:
+  description: "This GitOps pipeline is for daksh interiors and this project is to maintian it"
+  sourceRepos:
+    - '*'
+  destinations:
+    - server: 'https://kubernetes.default.svc'
+      namespace: daksh-in
+    - server: 'https://kubernetes.default.svc'
+      namespace: ingress-nginx
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'

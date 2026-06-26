@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: daksh-argocd-gitops
+  namespace: argocd
+spec:
+  project: daksh-project
+  source:
+    repoURL: 'https://github.com/ShivA9890/Daksh-interiors-ArgoCD-K8s.git'
+    targetRevision: main
+    path: k8s
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: daksh-in
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
