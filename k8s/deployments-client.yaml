@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daksh-interior-client
+  namespace: daksh-in
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: daksh-client
+  template:
+    metadata:
+      labels:
+        app: daksh-client
+    spec:
+      containers:
+        - name: client-container
+          image: shiv6933/daksh-client:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "50m"      # Barely anything, just enough to start
+              memory: "64Mi"  # Very small memory footprint
+            limits:
+              cpu: "200m"     # Cap at 20% of a CPU core
+              memory: "128Mi" # Hard limit

@@ -1,0 +1,19 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: daksh-server-hpa
+  namespace: daksh-in
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    apiVersion: apps/v1
+    name: daksh-interior-server
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+   - type: Resource
+     resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
