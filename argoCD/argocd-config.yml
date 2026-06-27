@@ -3,6 +3,16 @@ kind: Application
 metadata:
   name: daksh-argocd-gitops
   namespace: argocd
+  annotations:
+    # 1. Tell the updater exactly which images to track
+    argocd-image-updater.argoproj.io/image-list: client=shiv6933/daksh-client, server=shiv6933/daksh-server
+    
+    # 2. Track the absolute newest image pushed to the registry
+    argocd-image-updater.argoproj.io/client.update-strategy: latest
+    argocd-image-updater.argoproj.io/server.update-strategy: latest
+    
+    # 3. Tell the updater to securely override ArgoCD without needing GitHub passwords
+    argocd-image-updater.argoproj.io/write-back-method: argocd
 spec:
   project: daksh-project
   source:
