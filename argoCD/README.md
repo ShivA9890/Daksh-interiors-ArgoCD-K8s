@@ -23,13 +23,15 @@ usernme: admin
 use admin password
 login
 change password
+add argocd image updater 
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/stable/config/install.yaml
 
+add ingress-nginx
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 create project: 
 create application: 
 run both 
 kubectl apply -f argo-project.yml
 kubectl apply -f argocd-config.yml
 
-add argocd image updater 
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/stable/config/install.yaml
 
